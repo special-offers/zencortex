@@ -1,0 +1,4 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+zencortex24.com	TRUE	/	FALSE	1999999999	PHPSESSID	c2636198a001219c069ae28a694c188f
+

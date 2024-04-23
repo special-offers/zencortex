@@ -1,0 +1,1025 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from zencortex24.com/c/order-now.php?hop=l3mdigital&hopId=60f8c61d-7f72-42c7-97da-f113c677447b&pid=pre1 by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Apr 2024 23:35:10 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zencortex</title>
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="57x57" href="../apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="../apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="../apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="../apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="../apple-touch-icon-152x152.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon-180x180.png" />
+<link rel="apple-touch-icon" href="../apple-touch-icon-120x120-precomposed.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="manifest" href="../site.html">
+<link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#00aba9">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LCGD56PW3Y"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LCGD56PW3Y', {});
+
+    window.ga = window.ga || {};
+
+    // config EPC log API
+    ga.log = 'https://zencortex24.com/epc.php';
+
+    ga.setCookie = function (name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    ga.getCookie = function (name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) 
+                return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+    ga.logPurchase = function (uniqid, sku, price, url, query, type){
+        // JSON data to send
+        host = window.location.hostname;
+        const $data = {
+            uniqid: uniqid,
+            action: "purchase",
+            url: url,
+            type: type,
+            sku: sku,
+            price: price,
+            host: host
+        };
+        navigator.sendBeacon(ga.log, JSON.stringify($data));  
+    }
+    
+    ga.logBeginCheckout = function (uniqid, sku, url, query){
+        // JSON data to send
+        host = window.location.hostname;
+        const $data = {
+            uniqid: uniqid,
+            action: "begin_checkout",
+            sku: sku,
+            url: url,
+            query: query,
+            host: host
+        };
+        navigator.sendBeacon(ga.log, JSON.stringify($data));  
+    }   
+    
+    ga.ViewItem = function ($itemSKU,$itemValue){
+        gtag("event", "view_item", {
+            currency: "USD",
+            value: $itemValue,
+            items: [
+                {
+                    item_id: $itemSKU,
+                    item_name: "Zencortex (" + $itemSKU + ")",
+                }]
+        });
+        console.log("GA4 Track View Item", $itemSKU, $itemValue);
+    }
+
+    ga.BeginCheckout = function ($itemSKU,$itemValue){
+        gtag("event", "begin_checkout", {
+            currency: "USD",
+            value: $itemValue,
+            items: [
+                {
+                    item_id: $itemSKU,
+                    item_name: "Zencortex (" + $itemSKU + ")",
+                    quantity: 1,
+                    price: $itemValue                    
+                }]
+        });
+        console.log("GA4 Track Begin Checkout", $itemSKU, $itemValue);
+    }
+
+    ga.Purchase = function ($order,$itemSKU,$itemValue,$url = false){
+
+        $url = $url || window.location.pathname + encodeURIComponent(window.location.search);
+
+        gtag("event", "purchase", {
+            currency: "USD",
+            transaction_id: $order,
+            value: $itemValue,
+            page_location: $url,
+            items: [
+                {
+                    item_id: $itemSKU,
+                    item_name: "Zencortex (" + $itemSKU + ")",
+                    quantity: 1,
+                    price: $itemValue
+                }]
+        });    
+
+        if(typeof customTracker === 'function'){
+            customTracker($order, $itemSKU, $itemValue);
+        }             
+
+        console.log("GA4 Track Purchase", $order, $itemSKU, $itemValue);        
+    }
+
+    ga.waitFor = function (variableName, callback) {
+        if (typeof ga[variableName] !== 'undefined' && ga[variableName] !== null) {
+            callback();
+        } else {
+            setTimeout(function() {
+            ga.waitFor(variableName, callback);
+            }, 100);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+                    ga.uniqid = Math.floor(Math.random() * 100000) + Date.now().toString();
+            // log visits for Earning per Click computing
+            ga.url = window.location.pathname;
+            ga.query = encodeURIComponent(window.location.search);
+            // ga.logVisit;
+            ga.setCookie('ga_uniqid', ga.uniqid, 3);
+            
+                            ga.ViewItem("ZCT01", 69);    
+                            ga.ViewItem("ZCT06", 294);    
+                            ga.ViewItem("ZCT03", 177);    
+                            
+            ga.buttons = document.getElementsByClassName('addToCart');
+            for(var i = 0; i < ga.buttons.length; i++) {
+                ga.buttons[i].addEventListener('click', (e)  => {
+                    ga.BeginCheckout(e.target.dataset.sku, e.target.dataset.price);
+                    ga.setCookie(ga.uniqid + '_sku', e.target.dataset.sku, 3);
+                    ga.setCookie(ga.uniqid + '_price', e.target.dataset.price, 3);
+                    ga.setCookie(ga.uniqid + '_url', window.location.pathname, 3);
+                    ga.setCookie(ga.uniqid + '_query', encodeURIComponent(window.location.search), 3);
+                    ga.setCookie(ga.uniqid + '_type', "bank", 3);
+                    ga.logBeginCheckout(ga.uniqid, e.target.dataset.sku, window.location.pathname, encodeURIComponent(window.location.search));
+                    if(typeof window[e.target.dataset.callback] === 'function'){
+                        window[e.target.dataset.callback](e);
+                    }                        
+                }, false);
+            } 
+        
+            });
+</script>
+<script src="http://cbtb.clickbank.net/?vendor=zencortex" type="text/javascript"></script></head>
+<body>
+<section id="prices1" class="py-5 bg-light-new mt-md-3 mt-lg-4 mx-md-3 mx-lg-4 rounded-md-18">
+<div class="container py-md-5">
+<div class="row">
+<div class="col-12 text-center">
+<h2 class="display-5 mb-4 mb-md-5">Claim your Discounted ZenCortex Below</h2>
+</div>
+</div>
+<div class="row">
+<div class="col-12 col-md-4 mb-4 mb-md-0 order-3 order-md-1">
+<div class="rounded-18 border-green-light text-center p-4">
+<h3 class="mb-0">Try One</h3>
+<p class="small mb-0">30 Day Supply</p>
+<div class="col-9 mx-auto py-3">
+<picture>
+<source srcset="../assets/img/PRODx1-500px.webp" type="image/webp">
+<img src="../assets/img/PRODx1-500px.png" alt="ZenCortex 1 Bottle" class="img-fluid" loading="lazy">
+</picture>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+<h4 class="display-2">$69</h4>
+<div class="ms-2 pb-2 small">
+<span class="d-block text-start">Per</span>
+<span class="d-block text-start">Bottle</span>
+</div>
+</div>
+<p class="opacity-0 d-none d-md-block">No bonuses</p>
+<div class="col-12 text-center mb-4">
+<a class="addToCart btn-new btn-primary-new d-block px-0" data-sku="ZCT01" data-price="69" data-link-type="vsl-cta" data-link-index="1" data-callback="ctaEvents" href="https://zencortex.pay.clickbank.net/?cbitems=1&amp;cbfid=56066&amp;cbskin=44593&amp;cbexit=3735&amp;cbtimer=2180" target="_blank">Buy Now</a>
+</div>
+<p class="small mb-3">60 Day Money-Back Guarantee</p>
+<div class="col-7 mx-auto mb-3">
+<picture>
+<source srcset="../assets/img/cards.webp" type="image/webp">
+<img src="../assets/img/cards.png" alt="Card" class="img-fluid">
+</picture>
+</div>
+<p class="mb-1">TOTAL: <span class="fw-bold">$69</span>
+</p>
+<p class="fw-bold mb-0">+ SHIPPING</p>
+</div>
+</div>
+<div class="col-12 col-md-4 mb-3 mb-md-0 order-1 order-md-2">
+<div class="rounded-18 border-primary-new bg-light-second text-center p-4">
+<h3 class="mb-0">Best Value</h3>
+<p class="small mb-0">180 Day Supply</p>
+<div class="col-9 mx-auto py-3">
+<picture>
+<source srcset="../assets/img/PRODx6-500px.webp" type="image/webp">
+<img src="../assets/img/PRODx6-500px.png" alt="ZenCortex 6 Bottle" class="img-fluid" loading="lazy">
+</picture>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+<h4 class="display-2">$49</h4>
+<div class="ms-2 pb-2 small">
+<span class="d-block text-start">Per</span>
+<span class="d-block text-start">Bottle</span>
+</div>
+</div>
+<p>+ 2 FREE E-BOOKS</p>
+<div class="col-12 text-center mb-4">
+<a class="addToCart btn-new btn-primary-new d-block px-0" data-sku="ZCT06" data-price="294" data-link-type="vsl-cta" data-link-index="6" data-callback="ctaEvents" href="https://zencortex.pay.clickbank.net/?cbitems=3&amp;cbfid=56065&amp;cbskin=44595&amp;cbexit=3735&amp;cbtimer=2180" target="_blank">Buy Now</a>
+</div>
+<p class="small mb-3">60 Day Money-Back Guarantee</p>
+<div class="col-7 mx-auto mb-3">
+<picture>
+<source srcset="../assets/img/cards.webp" type="image/webp">
+<img src="../assets/img/cards.png" alt="Card" class="img-fluid">
+</picture>
+</div>
+<p class="mb-1">TOTAL: <span class="fw-bold">$294</span></p>
+<p class="fw-bold mb-0">+ FREE US SHIPPING</p>
+</div>
+</div>
+<div class="col-12 col-md-4 mb-3 order-2 order-md-3">
+<div class="rounded-18 border-green-light text-center p-4">
+<h3 class="mb-0">Most Popular</h3>
+<p class="small mb-0">90 Day Supply</p>
+<div class="col-9 mx-auto py-3">
+<picture>
+<source srcset="../assets/img/PRODx3-500px.webp" type="image/webp">
+<img src="../assets/img/PRODx3-500px.png" alt="ZenCortex 3 Bottle" class="img-fluid" loading="lazy">
+</picture>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+<h4 class="display-2">$59</h4>
+<div class="ms-2 pb-2 small">
+<span class="d-block text-start">Per</span>
+<span class="d-block text-start">Bottle</span>
+</div>
+</div>
+<p>+ 2 FREE E-BOOKS</p>
+<div class="col-12 text-center mb-4">
+<a class="addToCart btn-new btn-primary-new d-block px-0" data-sku="ZCT03" data-price="177" data-link-type="vsl-cta" data-link-index="3" data-callback="ctaEvents" href="https://zencortex.pay.clickbank.net/?cbitems=2&amp;cbfid=56065&amp;cbskin=44594&amp;cbexit=3735&amp;cbtimer=2180" target="_blank">Buy Now</a>
+</div>
+<p class="small mb-3">60 Day Money-Back Guarantee</p>
+<div class="col-7 mx-auto mb-3">
+<picture>
+<source srcset="../assets/img/cards.webp" type="image/webp">
+<img src="../assets/img/cards.png" alt="Card" class="img-fluid">
+</picture>
+</div>
+<p class="mb-1">TOTAL: <span class="fw-bold">$177</span></p>
+<p class="fw-bold mb-0">+ FREE US SHIPPING</p>
+</div>
+</div>
+<div class="col-12 text-center mt-sm-3 order-4">
+<p>Our customers say <span class="fw-bold me-2">4.98/5</span> <img src="../assets/img/stars.png" alt="Stars" class="img-fluid pb-2"> <span class="ms-2">based on 2000+ reviews</span></p>
+<div><a href="#reviews" class="text-dark">View Reviews</a> | <a href="#faqs" class="text-dark">View FAQ’s</a></div>
+</div>
+</div> </div>
+</section>
+<section class="py-5 my-md-5">
+<div class="container">
+<div class="row">
+<div class="col-12 col-lg-10 mx-auto text-center px-4">
+<h2 class="display-5 mb-5">Support And Optimize Your Hearing Naturally</h2>
+<p>When I first started working on the formula that was to become ZenCortex, I never would have imagined in a million years that I would one day help thousands of people from around the world fulfill their dreams of optimizing their hearing health.</p>
+<p>It's people like you that make all those years of research and testing worthwhile, and I hope you manage to get the most out of ZenCortex while I can still afford to produce it at these prices.</p>
+<p class="fw-semibold fs-5 fst-italic">Jonathan Miller Creator, ZenCortex</p>
+<div class="col-5 mx-auto">
+<img src="../assets/img/signature.png" alt="Signature" class="img-fluid">
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-light-gray py-5 mb-md-3 mb-lg-4 mx-md-3 mx-lg-4 rounded-md-18">
+<div class="container py-md-5">
+<div class="row align-items-center">
+<div class="col-12 col-lg-6 col-xl-7 pe-xl-5">
+<h2 class="display-5 text-center text-lg-start mb-5">Order 6 Bottles Or 3 Bottles And Get 2 Free Bonuses!</h2>
+<div class="d-none d-lg-block"><a href="#prices1" class="btn-new btn-primary-new d-block d-sm-inline-block">Order Now</a></div>
+</div>
+<div class="col-12 col-lg-6 col-xl-5">
+<div class="row">
+<div class="col-6 col-lg-12  mx-auto mb-lg-4">
+<div class="d-md-flex bg-white-new rounded-18 p-3 box-shadow align-items-center h-100">
+<div class="col-12 col-md-3 mx-auto mb-4 mb-md-0">
+<picture>
+<source media="(min-width: 500px)" srcset="../assets/img/book1.jpg">
+<source srcset="../assets/img/book1-m.jpg">
+<img srcset="../assets/img/book1-m.jpg 200w, /assets/img/book1.jpg 600w" sizes="(max-width: 500px) 200px, 600px" src="../assets/img/book1.jpg" alt="Free Bonus Ultimate Tea Remedies" class="img-fluid rounded-18" loading="lazy">
+</picture>
+</div>
+<div class="col-md-9 mx-auto ps-md-5 text-center text-md-start">
+<h3 class="fs-5">Free Bonus #1</h3>
+<p>The Ultimate Tea Remedies</p>
+<p class="small mb-0">(instant download)</p>
+</div>
+</div>
+</div>
+<div class="col-6 col-lg-12 mx-auto">
+<div class="d-md-flex bg-white-new rounded-18 p-3 box-shadow align-items-center h-100">
+<div class="col-12 col-md-3 mx-auto mb-4 mb-md-0">
+<picture class="img-fluid">
+<source media="(min-width: 500px)" srcset="../assets/img/book2.jpg">
+<source srcset="../assets/img/book2-m.jpg">
+<img srcset="../assets/img/book2-m.jpg 200w, /assets/img/book2.jpg 600w" sizes="(max-width: 500px) 200px, 600px" src="../assets/img/book2.jpg" alt="Free Bonus Powerful Ways To Sharpen Your Memory" class="img-fluid rounded-18" loading="lazy">
+</picture>
+</div>
+<div class="col-md-9 mx-auto ps-md-5 text-center text-md-start">
+<h3 class="fs-5">Free Bonus #2</h3>
+<p>Powerful Ways To Sharpen Your Memory</p>
+<p class="small mb-0">(instant download)</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-12 col-sm-10 col-md-8 mx-auto mt-5 d-block d-lg-none">
+<div class="text-center"><a href="#prices1" class="btn-new btn-primary-new d-block d-sm-inline-block">Order Now</a></div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-primary-new py-2">
+<div class="horizontal-scrolling-items-left d-none d-sm-flex text-uppercase">
+<div class="horizontal-scrolling-items__item text-white-new">
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *&nbsp;
+</div>
+<div class="horizontal-scrolling-items__item text-white-new">
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *&nbsp;
+</div>
+</div>
+<div class="animation pulse d-block d-sm-none px-3 text-white-new text-center text-uppercase fs-5">
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING!
+</div>
+</section>
+<section class="my-5 py-md-5">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-12 col-sm-10 mx-auto text-center">
+<h2 class="display-5 mb-4 mb-sm-5">Inside Every ZenCortex Drop You'll Find:</h2>
+<p class="mb-5">Over 20 Carefully-Selected Ingredients That Support Healthy Hearing, Including:</p>
+</div>
+<div class="col-lg-7">
+<div class="row">
+<div class="col-11 col-sm-6 mb-3 mb-sm-4 mx-auto">
+<div class="d-flex align-items-center border border-grey rounded-18 p-3 h-100">
+<div class="col-3">
+<img src="../assets/img/i-grapes.jpg" alt="Grape Seed" class="img-fluid rounded-18" loading="lazy">
+</div>
+<div class="col-9 ps-4">
+<p class="fw-bold fs-5 my-1">Grape Seed</p>
+<p class="mb-0 small">Supports healthy ears</p>
+</div>
+</div>
+</div>
+<div class="col-11 col-sm-6 mb-3 mb-sm-4 mx-auto">
+<div class="d-flex align-items-center border border-grey rounded-18 p-3 h-100">
+<div class="col-3">
+<img src="../assets/img/i-greenTea.jpg" alt="Green Tea" class="img-fluid rounded-18" loading="lazy">
+</div>
+<div class="col-9 ps-4">
+<p class="fw-bold fs-5 my-1">Green Tea</p>
+<p class="mb-0 small">Improves blood flow to the ears</p>
+</div>
+</div>
+</div>
+<div class="col-11 col-sm-6 mb-3 mb-sm-4 mx-auto">
+<div class="d-flex align-items-center border border-grey rounded-18 p-3 h-100">
+<div class="col-3">
+<img src="../assets/img/i-gymnema.jpg" alt="Gymnema Sylvestre" class="img-fluid rounded-18" loading="lazy">
+</div>
+<div class="col-9 ps-4">
+<p class="fw-bold fs-5 my-1">Gymnema Sylvestre</p>
+<p class="mb-0 small">Supports hearing</p>
+</div>
+</div>
+</div>
+<div class="col-11 col-sm-6 mb-3 mb-sm-4 mx-auto">
+<div class="d-flex align-items-center border border-grey rounded-18 p-3 h-100">
+<div class="col-3">
+<img src="../assets/img/i-capsicum.jpg" alt="Capsicum Annuum" class="img-fluid rounded-18" loading="lazy">
+</div>
+<div class="col-9 ps-4">
+<p class="fw-bold fs-5 my-1">Capsicum Annuum</p>
+<p class="mb-0 small">Supports a healthy inflammatory response</p>
+</div>
+</div>
+</div>
+<div class="col-11 col-sm-6 mb-3 mb-sm-4 mx-auto">
+<div class="d-flex align-items-center border border-grey rounded-18 p-3 h-100">
+<div class="col-3">
+<img src="../assets/img/i-ginseng-root.jpg" alt="Panax Ginseng" class="img-fluid rounded-18" loading="lazy">
+</div>
+<div class="col-9 ps-4">
+<p class="fw-bold fs-5 my-1">Panax Ginseng</p>
+<p class="mb-0 small">Neuromaintaining or supporting properties</p>
+</div>
+</div>
+</div>
+<div class="col-11 col-sm-6 mb-3 mb-sm-4 mx-auto">
+<div class="d-flex align-items-center border border-grey rounded-18 p-3 h-100">
+<div class="col-3">
+<img src="../assets/img/i-astagalus.jpg" alt="Astragalus" class="img-fluid rounded-18" loading="lazy">
+</div>
+<div class="col-9 ps-4">
+<p class="fw-bold fs-5 my-1">Astragalus</p>
+<p class="mb-0 small">Supports clear sounds</p>
+</div>
+</div>
+</div>
+<div class="col-11 col-sm-6 mb-3 mb-sm-4 mb-lg-0 mx-auto">
+<div class="d-flex align-items-center border border-grey rounded-18 p-3 h-100">
+<div class="col-3">
+<img src="../assets/img/i-chromium-picolinate.jpg" alt="Chromium Picolinate" class="img-fluid rounded-18" loading="lazy">
+</div>
+<div class="col-9 ps-4">
+<p class="fw-bold fs-5 my-1">Chromium Picolinate</p>
+<p class="mb-0 small">Supports auditory health</p>
+</div>
+</div>
+</div>
+<div class="col-11 col-sm-6 mb-3 mb-sm-4 mb-lg-0 mx-auto">
+<div class="d-flex align-items-center border border-grey rounded-18 p-3 h-100">
+<div class="col-3">
+<img src="../assets/img/i-maca-root.jpg" alt="Maca Root" class="img-fluid rounded-18" loading="lazy">
+</div>
+<div class="col-9 ps-4">
+<p class="fw-bold fs-5 my-1">Maca Root</p>
+<p class="mb-0 small">Boosts Your Energy</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="col-8 col-sm-6 col-lg-5 position-relative mx-auto">
+<picture>
+<source srcset="../assets/img/bottle-label.webp" type="image/webp">
+<img src="../assets/img/bottle-label.jpg" alt="Bottle Label" class="img-fluid" loading="lazy">
+</picture>
+<div class="modal-label">
+<img src="../assets/img/search-icon.svg" class="gsc-modal-open" alt="search icon">
+</div>
+<div class="gsc-modal-container">
+<div class="gsc-modal-content large">
+<div class="d-flex justify-content-end">
+<div id="gsc-modal-close" class="gsc-modal-close">&#x2715;</div>
+</div>
+<picture class="d-none d-lg-block">
+<source srcset="../assets/img/label.webp" type="image/webp">
+<img src="../assets/img/label.jpg" alt="Label ZenCortex" class="img-fluid">
+</picture>
+<picture class="d-block d-lg-none text-center">
+<source srcset="../assets/img/label-mobile.webp" type="image/webp">
+<img src="../assets/img/label-mobile.jpg" alt="Label ZenCortex" class="img-fluid">
+</picture>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="benefits" class="bg-light-new py-5 mx-md-3 mx-lg-4 rounded-md-18">
+<div class="container my-md-5">
+<div class="row">
+<div class="col-12">
+<div class="d-lg-flex align-items-center">
+<div class="col-12 col-sm-8 col-lg-5 mx-auto px-4 px-lg-5">
+<picture class="img-fluid">
+<source media="(min-width: 500px)" srcset="../assets/img/product-image.webp" type="image/webp">
+<source srcset="../assets/img/product-image-m.webp" type="image/webp">
+<source media="(min-width: 500px)" srcset="../assets/img/product-image.png" type="image/png">
+<source srcset="../assets/img/product-image-m.png" type="image/png">
+<img srcset="../assets/img/product-image-m.png 500w, /assets/img/product-image.png 800w" sizes="(max-width: 500px) 500px, 800px" src="../assets/img/product-image.png" alt="ZenCortex Bottle with fruits" class="img-fluid" loading="lazy">
+</picture>
+</div>
+<div class="col-12 col-lg-7 px-4 pt-4 px-lg-5 pt-lg-0">
+<h2 class="fw-normal mb-4">Do you want to support your hearing?</h2>
+<p class="mb-4">You can take steps to optimize your hearing starting today. Our new and improved ZenCortex formula works to optimize your hearing using only research-backed, all-natural ingredients combined in the precise ratios required to support healthy hearing.</p>
+<div class="row mb-3">
+<div class="col-6 col-md-4 d-flex align-items-center mb-3">
+<svg xmlns="http://www.w3.org/2000/svg" height="1.1em" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" /></svg>
+<p class="mb-0 ms-2">Plant Ingredients</p>
+</div>
+<div class="col-6 col-md-4 d-flex align-items-center mb-3">
+<svg xmlns="http://www.w3.org/2000/svg" height="1.1em" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" /></svg>
+<p class="mb-0 ms-2">No Stimulants</p>
+</div>
+<div class="col-6 col-md-4 d-flex align-items-center mb-3">
+<svg xmlns="http://www.w3.org/2000/svg" height="1.1em" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" /></svg>
+<p class="mb-0 ms-2">Non-Habit Forming</p>
+</div>
+</div>
+<div><a href="#prices2" class="btn-new btn-primary-new d-block d-md-inline-block">Order Now</a></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="reviews" class="py-5">
+<div class="container py-sm-5">
+<div class="row">
+<div class="col-12 col-sm-10 mx-auto">
+<h2 class="text-center display-5 mb-5">Real Customers <br> Real Life Changing Results</h2>
+</div>
+<div class="d-flex col-md-10 mx-auto mb-5">
+<div class="col-3 px-1 mb-2 mb-md-0 pt-5">
+<div class="p-2 p-md-3 box-shadow rounded-18">
+<picture>
+<source media="(min-width: 500px)" srcset="../assets/img/person1.jpg">
+<img src="../assets/img/person1-m.jpg" alt="Person Holding ZenCortex" class="img-fluid rounded-18" loading="lazy">
+</picture>
+</div>
+</div>
+<div class="col-6 col-md-3 px-1 mb-2 mb-md-0">
+<div class="p-2 p-md-3 box-shadow rounded-18">
+<picture class="img-fluid">
+<source media="(min-width: 500px)" srcset="../assets/img/person2.jpg">
+<img src="../assets/img/person2-m.jpg" alt="Person 2 Holding ZenCortex" class="img-fluid rounded-18" loading="lazy">
+</picture>
+</div>
+</div>
+<div class="col-3 px-1 pt-5">
+<div class="p-2 p-md-3 box-shadow rounded-18">
+<picture class="img-fluid">
+<source media="(min-width: 500px)" srcset="../assets/img/person3.jpg">
+<img src="../assets/img/person3-m.jpg" alt="Person 3 Holding ZenCortex" class="img-fluid rounded-18" loading="lazy">
+</picture>
+</div>
+</div>
+<div class="col-6 col-md-3 px-1 d-none d-md-block">
+<div class="p-3 box-shadow rounded-18">
+<picture class="img-fluid">
+<source media="(min-width: 500px)" srcset="../assets/img/person4.jpg">
+<img src="../assets/img/person4-m.jpg" alt="Person 4 Holding ZenCortex" class="img-fluid rounded-18" loading="lazy">
+</picture>
+</div>
+</div>
+</div>
+<div class="col-11 col-md-10 mx-auto">
+<div class="col-12 mx-auto mb-4">
+<div class="bg-white-new d-flex border border-grey rounded-18 flex-wrap p-4 align-items-center text-center text-md-start">
+<div class="col-4 mx-auto col-md-2 text-center mb-4 mb-md-0">
+<img src="../assets/img/person6-m.jpg" alt="jack Review" class="img-fluid rounded-circle">
+</div>
+<div class="col-12 col-md-9">
+<p class="fst-italic">“It's only been three weeks since I started taking ZenCortex, but I love how easy it is to take and how well it works to support my mental sharpness. I put a couple of drops in my morning coffee and just go on my way. I've even shared my supply with a few friends and they're already coming back for more!”</p>
+<p><span class="fw-bold">Jack S.</span> - Arizona, USA</p>
+<p class="mb-0"><img src="../assets/img/stars.png" alt="5 Stars" class="img-fluid pb-2"> <span class="pt-1 ps-2">Verified Purchase</span></p>
+</div>
+</div>
+</div>
+<div class="col-12 mx-auto">
+<div class="bg-white-new d-flex border border-grey rounded-18 flex-wrap p-4 align-items-center text-center text-md-start">
+<div class="col-4 mx-auto col-md-2 text-center mb-4 mb-md-0">
+<img src="../assets/img/person7-m.jpg" alt="sabine Review" class="img-fluid rounded-circle">
+</div>
+<div class="col-12 col-md-9">
+<p class="fst-italic">“I treasure my peace and quiet more than anything. So I'm well aware just how important the health of my ears is. Knowing that by taking ZenCortex I'm feeding my hearing these essential nutrients helps me sleep better at night. Definitely give this one a try.”</p>
+<p><span class="fw-bold">Sabine G.</span> - Texas, USA</p>
+<p class="mb-0"><img src="../assets/img/stars.png" alt="5 Stars" class="img-fluid pb-2"> <span class="pt-1 ps-2">Verified Purchase</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="prices2" class="py-5 bg-light-new mx-md-3 mx-lg-4 rounded-md-18">
+<div class="container py-md-5">
+<div class="row">
+<div class="col-12 text-center">
+<h2 class="display-5 mb-5">Support Your Healthy Hearing With ZenCortex</h2>
+</div>
+</div>
+<div class="row">
+<div class="col-12 col-md-4 mb-4 mb-md-0 order-3 order-md-1">
+<div class="rounded-18 border-green-light text-center p-4">
+<h3 class="mb-0">Try One</h3>
+<p class="small mb-0">30 Day Supply</p>
+<div class="col-9 mx-auto py-3">
+<picture>
+<source srcset="../assets/img/PRODx1-500px.webp" type="image/webp">
+<img src="../assets/img/PRODx1-500px.png" alt="ZenCortex 1 Bottle" class="img-fluid" loading="lazy">
+</picture>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+<h4 class="display-2">$69</h4>
+<div class="ms-2 pb-2 small">
+<span class="d-block text-start">Per</span>
+<span class="d-block text-start">Bottle</span>
+</div>
+</div>
+<p class="opacity-0 d-none d-md-block">No bonuses</p>
+<div class="col-12 text-center mb-4">
+<a class="addToCart btn-new btn-primary-new d-block px-0" data-sku="ZCT01" data-price="69" data-link-type="vsl-cta" data-link-index="1" data-callback="ctaEvents" href="https://zencortex.pay.clickbank.net/?cbitems=1&amp;cbfid=56066&amp;cbskin=44593&amp;cbexit=3735&amp;cbtimer=2180" target="_blank">Buy Now</a>
+</div>
+<p class="small mb-3">60 Day Money-Back Guarantee</p>
+<div class="col-7 mx-auto mb-3">
+<picture>
+<source srcset="../assets/img/cards.webp" type="image/webp">
+<img src="../assets/img/cards.png" alt="Card" class="img-fluid">
+</picture>
+</div>
+<p class="mb-1">TOTAL: <span class="fw-bold">$69</span>
+</p>
+<p class="fw-bold mb-0">+ SHIPPING</p>
+</div>
+</div>
+<div class="col-12 col-md-4 mb-3 mb-md-0 order-1 order-md-2">
+<div class="rounded-18 border-primary-new bg-light-second text-center p-4">
+<h3 class="mb-0">Best Value</h3>
+<p class="small mb-0">180 Day Supply</p>
+<div class="col-9 mx-auto py-3">
+<picture>
+<source srcset="../assets/img/PRODx6-500px.webp" type="image/webp">
+<img src="../assets/img/PRODx6-500px.png" alt="ZenCortex 6 Bottle" class="img-fluid" loading="lazy">
+</picture>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+<h4 class="display-2">$49</h4>
+<div class="ms-2 pb-2 small">
+<span class="d-block text-start">Per</span>
+<span class="d-block text-start">Bottle</span>
+</div>
+</div>
+<p>+ 2 FREE E-BOOKS</p>
+<div class="col-12 text-center mb-4">
+<a class="addToCart btn-new btn-primary-new d-block px-0" data-sku="ZCT06" data-price="294" data-link-type="vsl-cta" data-link-index="6" data-callback="ctaEvents" href="https://zencortex.pay.clickbank.net/?cbitems=3&amp;cbfid=56065&amp;cbskin=44595&amp;cbexit=3735&amp;cbtimer=2180" target="_blank">Buy Now</a>
+</div>
+<p class="small mb-3">60 Day Money-Back Guarantee</p>
+<div class="col-7 mx-auto mb-3">
+<picture>
+<source srcset="../assets/img/cards.webp" type="image/webp">
+<img src="../assets/img/cards.png" alt="Card" class="img-fluid">
+</picture>
+</div>
+<p class="mb-1">TOTAL: <span class="fw-bold">$294</span></p>
+<p class="fw-bold mb-0">+ FREE US SHIPPING</p>
+</div>
+</div>
+<div class="col-12 col-md-4 mb-3 order-2 order-md-3">
+<div class="rounded-18 border-green-light text-center p-4">
+<h3 class="mb-0">Most Popular</h3>
+<p class="small mb-0">90 Day Supply</p>
+<div class="col-9 mx-auto py-3">
+<picture>
+<source srcset="../assets/img/PRODx3-500px.webp" type="image/webp">
+<img src="../assets/img/PRODx3-500px.png" alt="ZenCortex 3 Bottle" class="img-fluid" loading="lazy">
+</picture>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+<h4 class="display-2">$59</h4>
+<div class="ms-2 pb-2 small">
+<span class="d-block text-start">Per</span>
+<span class="d-block text-start">Bottle</span>
+</div>
+</div>
+<p>+ 2 FREE E-BOOKS</p>
+<div class="col-12 text-center mb-4">
+<a class="addToCart btn-new btn-primary-new d-block px-0" data-sku="ZCT03" data-price="177" data-link-type="vsl-cta" data-link-index="3" data-callback="ctaEvents" href="https://zencortex.pay.clickbank.net/?cbitems=2&amp;cbfid=56065&amp;cbskin=44594&amp;cbexit=3735&amp;cbtimer=2180" target="_blank">Buy Now</a>
+</div>
+<p class="small mb-3">60 Day Money-Back Guarantee</p>
+<div class="col-7 mx-auto mb-3">
+<picture>
+<source srcset="../assets/img/cards.webp" type="image/webp">
+<img src="../assets/img/cards.png" alt="Card" class="img-fluid">
+</picture>
+</div>
+<p class="mb-1">TOTAL: <span class="fw-bold">$177</span></p>
+<p class="fw-bold mb-0">+ FREE US SHIPPING</p>
+</div>
+</div>
+<div class="col-12 text-center mt-sm-3 order-4">
+<p>Our customers say <span class="fw-bold me-2">4.98/5</span> <img src="../assets/img/stars.png" alt="Stars" class="img-fluid pb-2"> <span class="ms-2">based on 2000+ reviews</span></p>
+<div><a href="#reviews" class="text-dark">View Reviews</a> | <a href="#faqs" class="text-dark">View FAQ’s</a></div>
+</div>
+</div> </div>
+</section>
+<section id="faqs" class="py-5">
+<div class="container py-md-5">
+<div class="row">
+<div class="col-11 col-sm-10 mx-auto">
+<h2 class="display-5 mb-5 text-center">Frequently Asked Questions</h2>
+<div class="gsc-accordion">
+<div class="gsc-accordion-item open">
+<div class="gsc-accordion-header"><span class="fw-bold me-4">Is ZenCortex right for Me?</span></div>
+<div class="gsc-accordion-content">
+<p class="mb-0">ZenCortex has provided amazing hearing support for men and women in their 30s, 40, 50s and even 70s. Because it was engineered based on teachings of modern science, ZenCortex formula is very gentle yet very powerful at the same time using pure plant ingredients and natural minerals. And you can rest assured knowing it's manufactured in the USA from the finest of foreign and domestic ingredients.</p>
+</div>
+</div>
+<div class="gsc-accordion-item">
+<div class="gsc-accordion-header"><span class="fw-bold me-4">What kind of results can I expect from ZenCortex?</span></div>
+<div class="gsc-accordion-content">
+<p class="mb-0">ZenCortex is a powerful and effective hearing support and all-day energy helper. Thousands of people enjoy taking ZenCortex every day with great results and we have not received a single complaint yet. Once your body adapts to the ingredients you will notice less noise and better ear health.</p>
+</div>
+</div>
+<div class="gsc-accordion-item">
+<div class="gsc-accordion-header"><span class="fw-bold me-4">How long will it take to see results?</span></div>
+<div class="gsc-accordion-content">
+<p class="mb-0">We're all different and that's why the time it takes to see results varies. Most people start feeling a difference after the first week. In our tests, the best results come when you take ZenCortex consistently for 3 months (or longer) to support and optimize your entire system. Therefore, we strongly recommend you take advantage of our 3 or 6 bottle discount package.</p>
+</div>
+</div>
+<div class="gsc-accordion-item">
+<div class="gsc-accordion-header"><span class="fw-bold me-4">What is the best way to take ZenCortex?</span></div>
+<div class="gsc-accordion-content">
+<p class="mb-0">Take one dropper in the morning before breakfast and take another dropper before lunch. You can place it under your tongue than swallow, dissolve it in a glass of water, or natural juice. You will love the results and how you'll feel. A full dropper contains approximately 15 drops of liquid.</p>
+</div>
+</div>
+<div class="gsc-accordion-item">
+<div class="gsc-accordion-header"><span class="fw-bold me-4">What if ZenCortex doesn't work for me?</span></div>
+<div class="gsc-accordion-content">
+<p class="mb-0">I demand you are enthusiastic with your purchase, not just satisfied. And you won't know until you try it! So you can use ZenCortex for 60 days, with my "No Questions Asked 100% Money Back Guarantee". The only way to be totally convinced is to try this amazing formula and experience the results for yourself.</p>
+</div>
+</div>
+<div class="gsc-accordion-item">
+<div class="gsc-accordion-header"><span class="fw-bold me-4">Where can I buy ZenCortex and how quickly can I get it?</span></div>
+<div class="gsc-accordion-content">
+<p class="mb-0">To make sure you are buying the original product and to ensure the purity of ingredients please buy from the official website only. We'll ship your order directly to your home or office using a premium carrier such as FedEx or UPS. We strive to ship every order within 24 working hours and to make things easy you will receive an email with your tracking number so that you can follow your package. On average, the package will arrive at your doorstep somewhere between 5 to 10 days for domestic orders.</p>
+</div>
+</div>
+<div class="gsc-accordion-item">
+<div class="gsc-accordion-header"><span class="fw-bold me-4">Is my purchase secure? How many times will you charge my card?</span></div>
+<div class="gsc-accordion-content">
+<p class="mb-0">To purchase ZenCortex you are only asked for a one time payment right on this page. There are no other future payments needed to benefit from this product. This website is highly secure. We use industry-leading technology (such as SSLs) to keep your information safe and private.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-light-new py-5">
+<div class="container py-md-5">
+<div class="row">
+<div class="col-12 position-relative p-lg-5">
+<div class="col-xl-11 mx-auto p-3 p-md-5 position-relative z-1">
+<div class="d-md-flex align-items-center d-flex flex-wrap position-relative">
+<div class="col-12 col-md-8 order-2 order-md-1 col-xl-8 text-center text-md-start">
+<h2 class="mb-4 display-6">100% Satisfaction Guaranteed 60-Day Money Back Guarantee</h2>
+<p class="mb-0">ZenCortex comes with a 100% money back guarantee - 60 full days from your original purchase. If you're not totally and completely satisfied with our product or your results within the first 60 days simply let us know by calling our toll-free number or dropping us an email and we'll gladly give you a full refund within 48 hours of the product being returned. That's right - simply return the product, even your empty bottles, anytime within 60 days of your purchase and you'll receive a full, no-questions-asked refund (minus shipping and handling fees).</p>
+</div>
+<div class="col-6 col-sm-5 col-md-4 col-xl-4 mx-auto order-1 order-md-2 mb-4 mb-md-0 px-lg-5">
+<picture>
+<source srcset="../assets/img/guarantee_badge.webp" type="image/webp">
+<img src="../assets/img/guarantee_badge.png" alt="Guarantee badge" class="img-fluid">
+</picture>
+</div>
+</div>
+</div>
+<div class="line-box-wrap d-none d-md-block">
+<svg preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1204 435"><path d="M55.69,23.57c218.85-.52,1081.5-9.76,1109.5,23.39s19.36,229.73,19.36,297.26-376.3,96.69-532.48,82.11S117.31,458.22,55.69,398.08,8.52,371.88,21.24,226,12.23,59.77,34,34.85,275.15,2,474.39,6,1199,12.1,1199,60.75s-14.45,321.08-14.45,337.33-526.32,13.41-600,13.41S31.87,426.33,19.84,385-.66,86.65,9.59,60.75,527.91,19,671.5,19q143.6,0,366.8,28"></path></svg>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-primary-new py-2">
+<div class="horizontal-scrolling-items-left d-none d-sm-flex text-uppercase">
+<div class="horizontal-scrolling-items__item text-white-new">
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *&nbsp;
+</div>
+<div class="horizontal-scrolling-items__item text-white-new">
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING! *&nbsp;
+</div>
+</div>
+<div class="animation pulse d-block d-sm-none px-3 text-white-new text-center text-uppercase fs-5">
+<span class="fw-bold">Special Offer:</span> EVERY ORDER OF 6 BOTTLES GETS FREE SHIPPING!
+</div>
+</section>
+<section class="py-5">
+<div class="container py-md-5">
+<div class="row">
+<div class="col-12 text-center">
+<h2 class="display-5 mb-5">Try ZenCortex Today!</h2>
+</div>
+</div>
+<div class="row">
+<div class="col-12 col-md-4 mb-4 mb-md-0 order-3 order-md-1">
+<div class="rounded-18 border-green-light text-center p-4">
+<h3 class="mb-0">Try One</h3>
+<p class="small mb-0">30 Day Supply</p>
+<div class="col-9 mx-auto py-3">
+<picture>
+<source srcset="../assets/img/PRODx1-500px.webp" type="image/webp">
+<img src="../assets/img/PRODx1-500px.png" alt="ZenCortex 1 Bottle" class="img-fluid" loading="lazy">
+</picture>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+<h4 class="display-2">$69</h4>
+<div class="ms-2 pb-2 small">
+<span class="d-block text-start">Per</span>
+<span class="d-block text-start">Bottle</span>
+</div>
+</div>
+<p class="opacity-0 d-none d-md-block">No bonuses</p>
+<div class="col-12 text-center mb-4">
+<a class="addToCart btn-new btn-primary-new d-block px-0" data-sku="ZCT01" data-price="69" data-link-type="vsl-cta" data-link-index="1" data-callback="ctaEvents" href="https://zencortex.pay.clickbank.net/?cbitems=1&amp;cbfid=56066&amp;cbskin=44593&amp;cbexit=3735&amp;cbtimer=2180" target="_blank">Buy Now</a>
+</div>
+<p class="small mb-3">60 Day Money-Back Guarantee</p>
+<div class="col-7 mx-auto mb-3">
+<picture>
+<source srcset="../assets/img/cards.webp" type="image/webp">
+<img src="../assets/img/cards.png" alt="Card" class="img-fluid">
+</picture>
+</div>
+<p class="mb-1">TOTAL: <span class="fw-bold">$69</span>
+</p>
+<p class="fw-bold mb-0">+ SHIPPING</p>
+</div>
+</div>
+<div class="col-12 col-md-4 mb-3 mb-md-0 order-1 order-md-2">
+<div class="rounded-18 border-primary-new bg-light-second text-center p-4">
+<h3 class="mb-0">Best Value</h3>
+<p class="small mb-0">180 Day Supply</p>
+<div class="col-9 mx-auto py-3">
+<picture>
+<source srcset="../assets/img/PRODx6-500px.webp" type="image/webp">
+<img src="../assets/img/PRODx6-500px.png" alt="ZenCortex 6 Bottle" class="img-fluid" loading="lazy">
+</picture>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+<h4 class="display-2">$49</h4>
+<div class="ms-2 pb-2 small">
+<span class="d-block text-start">Per</span>
+<span class="d-block text-start">Bottle</span>
+</div>
+</div>
+<p>+ 2 FREE E-BOOKS</p>
+<div class="col-12 text-center mb-4">
+<a class="addToCart btn-new btn-primary-new d-block px-0" data-sku="ZCT06" data-price="294" data-link-type="vsl-cta" data-link-index="6" data-callback="ctaEvents" href="https://zencortex.pay.clickbank.net/?cbitems=3&amp;cbfid=56065&amp;cbskin=44595&amp;cbexit=3735&amp;cbtimer=2180" target="_blank">Buy Now</a>
+</div>
+<p class="small mb-3">60 Day Money-Back Guarantee</p>
+<div class="col-7 mx-auto mb-3">
+<picture>
+<source srcset="../assets/img/cards.webp" type="image/webp">
+<img src="../assets/img/cards.png" alt="Card" class="img-fluid">
+</picture>
+</div>
+<p class="mb-1">TOTAL: <span class="fw-bold">$294</span></p>
+<p class="fw-bold mb-0">+ FREE US SHIPPING</p>
+</div>
+</div>
+<div class="col-12 col-md-4 mb-3 order-2 order-md-3">
+<div class="rounded-18 border-green-light text-center p-4">
+<h3 class="mb-0">Most Popular</h3>
+<p class="small mb-0">90 Day Supply</p>
+<div class="col-9 mx-auto py-3">
+<picture>
+<source srcset="../assets/img/PRODx3-500px.webp" type="image/webp">
+<img src="../assets/img/PRODx3-500px.png" alt="ZenCortex 3 Bottle" class="img-fluid" loading="lazy">
+</picture>
+</div>
+<div class="d-flex justify-content-center align-items-center">
+<h4 class="display-2">$59</h4>
+<div class="ms-2 pb-2 small">
+<span class="d-block text-start">Per</span>
+<span class="d-block text-start">Bottle</span>
+</div>
+</div>
+<p>+ 2 FREE E-BOOKS</p>
+<div class="col-12 text-center mb-4">
+<a class="addToCart btn-new btn-primary-new d-block px-0" data-sku="ZCT03" data-price="177" data-link-type="vsl-cta" data-link-index="3" data-callback="ctaEvents" href="https://zencortex.pay.clickbank.net/?cbitems=2&amp;cbfid=56065&amp;cbskin=44594&amp;cbexit=3735&amp;cbtimer=2180" target="_blank">Buy Now</a>
+</div>
+<p class="small mb-3">60 Day Money-Back Guarantee</p>
+<div class="col-7 mx-auto mb-3">
+<picture>
+<source srcset="../assets/img/cards.webp" type="image/webp">
+<img src="../assets/img/cards.png" alt="Card" class="img-fluid">
+</picture>
+</div>
+<p class="mb-1">TOTAL: <span class="fw-bold">$177</span></p>
+<p class="fw-bold mb-0">+ FREE US SHIPPING</p>
+</div>
+</div>
+<div class="col-12 text-center mt-sm-3 order-4">
+<p>Our customers say <span class="fw-bold me-2">4.98/5</span> <img src="../assets/img/stars.png" alt="Stars" class="img-fluid pb-2"> <span class="ms-2">based on 2000+ reviews</span></p>
+<div><a href="#reviews" class="text-dark">View Reviews</a> | <a href="#faqs" class="text-dark">View FAQ’s</a></div>
+</div>
+</div> </div>
+</section>
+<section class="py-5 bg-light-new mb-md-3 mb-lg-4 mx-md-3 mx-lg-4 rounded-md-18">
+<div class="container">
+<div class="row">
+<div class="col-12">
+<h2 class="display-5 text-center mb-4 mb-md-5">Scientific References</h2>
+</div>
+<div class="col-11 col-md-10 col-lg-8 mx-auto d-sm-flex">
+<picture>
+<source srcset="../assets/img/refs.webp" type="image/webp">
+<img src="../assets/img/refs.png" alt="References" class="img-fluid">
+</picture>
+</div>
+<div class="col-12  my-3"><p class="p-3 mb-0 text-center reference-text">The company is not endorsed by, sponsored by, or affiliated with any of these organizations</p></div>
+<div class="col-12 col-sm-6">
+<ol class="reference-text">
+<li>Rebooting the brain helps stop the ring of tinnitus in rats - National Institute on Deafness and Other Communication Disorders (NIDCD)</li>
+<li>The link between hearing loss and Alzheimer's disease&nbsp;</li>
+<li>White, P. M., Doetzlhofer, A., Lee, Y. S., Groves, A. K., and Segil, N. (2006). Mammalian cochlear supporting cells can divide and trans-differentiate into hair cells. Nature 441, 984-987.&nbsp;</li>
+<li>Tinnitus Epidemiology: Prevalence, Severity, Exposures And Treatment Patterns In The United States</li>
+<li>What Herbs are Good for Hearing Loss?</li>
+<li>Neuroprotective potential of phytochemicals&nbsp;- G. Phani Kumar and Farhath Khanum - Jul-Dec 2012&nbsp;</li>
+<li>A Course in Miracles by Helen Schucman</li>
+<li>Identification of medicinal plants of Urmia for treatment of gastrointestinal disorders</li>
+<li>The Benefits of California Poppy (Eschscholzia californica)</li>
+<li>Tinnitus is the result of the brain trying, but failing, to repair itself&nbsp;- Georgetown University Medical Center - Jan 2011</li>
+<li>Free radical production and ischemic brain damage: influence of postischemic oxygen tension - Agardh CD and others</li>
+<li>B Vitamins and the Brain: Mechanisms, Dose and Efficacy-A Review - David O. Kennedy - Feb 2016</li>
+<li>Mapping cortical hubs in tinnitus.&nbsp;- Winfried Schlee and others - Nov 2009</li>
+</ol>
+</div>
+<div class="col-12 col-sm-6">
+<ol class="reference-text mb-0" start="14">
+<li>Intracranial Mapping of a Cortical Tinnitus System using Residual Inhibition - WilliamSedley and others - Apr 2015</li>
+<li>Neurotoxicity of General Anesthetics: Cause for Concern?&nbsp;- Misha Perouansky and Hugh C. Hemmings - Dec 2010</li>
+<li>Potential Links between Impaired One-Carbon Metabolism Due to Polymorphisms, Inadequate B-Vitamin Status, and the Development of Alzheimer's Disease.&nbsp;- Troesch B and others - Dec 2016</li>
+<li>Neurotoxicity of General Anesthetics: Cause for Concern?” - Misha Perouansky and Hugh C. Hemmings - Dec 2010&nbsp;</li>
+<li>Singh V.K., Newman V.L., Berg A.N., MacVittie T.J. Animal models for acute radiation syndrome drug discovery. Expert Opin. Drug Discov. 2015;10:497-517. doi: 10.1517/17460441.2015.1023290</li>
+<li>Abayomi O.K. Pathogenesis of irradiation-induced cognitive dysfunction. Acta Oncol. 1996;35:659-663. doi: 10.3109/02841869609083995</li>
+<li>Davydov M., Krikorian A.D. Eleutherococcus senticosus (Rupr. &amp; Maxim.) Maxim. (Araliaceae) as an adaptogen: A closer look. J. Ethnopharmacol. 2000;72:345-393</li>
+<li>Xie Y., Zhang B., Zhang Y. Protective effects of Acanthopanax polysaccharides on cerebral ischemia-reperfusion injury and its mechanisms. Int. J. Biol. Macromol. 2015;72:946-950. doi: 10.1016/j.ijbiomac.2014.09.055<br><br></li>
+</ol>
+</div>
+</div>
+</div> </section>
+<footer class="text-center bg-dark-new py-md-5">
+<div class="container text-white-new py-5">
+<ul class="list-inline small mb-4">
+<li class="list-inline-item"><a class="link-light text-decoration-none" href="https://zencortex24.com/info/contact.html" target="_blank">Contact</a></li>
+<li class="list-inline-item"><a class="link-light text-decoration-none" href="https://zencortex24.com/info/terms.html" target="_blank">Terms</a></li>
+<li class="list-inline-item"><a class="link-light text-decoration-none" href="https://zencortex24.com/info/privacy.html" target="_blank">Privacy</a></li>
+<li class="list-inline-item"><a class="link-light text-decoration-none" href="https://zencortex24.com/info/return-policy.html" target="_blank">Return Policy</a></li>
+<li class="list-inline-item"><a class="link-light text-decoration-none" href="https://zencortex24.com/info/shipping.html" target="_blank">Shipping</a></li>
+<li class="list-inline-item"><a class="link-light text-decoration-none" href="https://zencortex24.com/info/disclamer.html" target="_blank">Disclaimer</a></li>
+<li class="list-inline-item"><a class="link-light text-decoration-none" href="https://zencortex24.com/unsubscribe.php" target="_blank">Report Spam</a></li>
+</ul>
+<div class="row bg-disclaimer">
+<div class="col-md-10 mx-auto">
+<p class="fw-light reference-text">Statements on this website have not been evaluated by the Food and Drug Administration. Products are not intended to diagnose, treat, cure or prevent any disease.</p>
+<p class="fw-light reference-text">The website's content and the product for sale is based upon the author's opinion and is provided solely on an "AS IS" and "AS AVAILABLE" basis. You should do your own research and confirm the information with other sources when searching for information regarding health issues and always review the information carefully with your professional health care provider before using any of the protocols presented on this website and/or in the product sold here. Neither ClickBank nor the author are engaged in rendering medical or similar professional services or advice via this website or in the product, and the information provided is not intended to replace medical advice offered by a physician or other licensed healthcare provider. You should not construe ClickBank's sale of this product as an endorsement by ClickBank of the views expressed herein, or any warranty or guarantee of any strategy, recommendation, treatment, action, or application of advice made by the author of the product.</p>
+<p class="fw-light reference-text">Some names and personal identifying information on this site have been changed to protect the privacy of individuals.</p>
+<p class="fw-light reference-text">ClickBank is the retailer of products on this site. CLICKBANK® is a registered trademark of Click Sales Inc., a Delaware corporation located at 1444 S. Entertainment Ave., Suite 410 Boise, ID 83709, USA and used by permission. ClickBank's role as retailer does not constitute an endorsement, approval or review of these products or any claim, statement or opinion used in promotion of these products.</p>
+<p class="fw-light reference-text">For Product Support, please contact the vendor <a class="text-white" href="https://zencortex24.com/cdn-cgi/l/email-protection#52212722223d20261228373c313d2026372a3a237c313d3f">here</a>.<br>For Order Support, please contact ClickBank <a class="text-white-new" href="https://www.clkbank.com/#!/" target="blank">here</a>.</p>
+</div>
+</div>
+<div></div>
+<p class="text-white-new opacity-75 mb-0 small">© ZenCortex Research 2024 All Rights Reserved. </p>
+</div>
+</footer>
+<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="../assets/js/script.min.js"></script>
+</body>
+
+<!-- Mirrored from zencortex24.com/c/order-now.php?hop=l3mdigital&hopId=60f8c61d-7f72-42c7-97da-f113c677447b&pid=pre1 by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 22 Apr 2024 23:35:11 GMT -->
+</html>
